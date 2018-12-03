@@ -15,6 +15,7 @@
 		05539632219E6B97006E44B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05539631219E6B97006E44B3 /* GoogleService-Info.plist */; };
 		05539634219E6C51006E44B3 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05539633219E6C51006E44B3 /* LoginPage.swift */; };
 		05539636219E6C7C006E44B3 /* addLiftPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05539635219E6C7C006E44B3 /* addLiftPage.swift */; };
+		055E286A21A361DD00994F59 /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E286921A361DD00994F59 /* Lift.swift */; };
 		F6CB8B574FED2998D7B0AE8A /* Pods_Gainzz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D8962DFC0840934F5BCE74 /* Pods_Gainzz.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		05539631219E6B97006E44B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		05539633219E6C51006E44B3 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		05539635219E6C7C006E44B3 /* addLiftPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addLiftPage.swift; sourceTree = "<group>"; };
+		055E286921A361DD00994F59 /* Lift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
 		13D8962DFC0840934F5BCE74 /* Pods_Gainzz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gainzz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BEFD18F9791806DE6BA951 /* Pods-Gainzz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gainzz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gainzz/Pods-Gainzz.debug.xcconfig"; sourceTree = "<group>"; };
 		EA26C4AD8776C3B68E50FEC3 /* Pods-Gainzz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gainzz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gainzz/Pods-Gainzz.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		0553961E219E49BA006E44B3 /* Gainzz */ = {
 			isa = PBXGroup;
 			children = (
+				055E286821A361C200994F59 /* Models */,
 				05539631219E6B97006E44B3 /* GoogleService-Info.plist */,
 				0553961F219E49BA006E44B3 /* AppDelegate.swift */,
 				05539621219E49BA006E44B3 /* ViewController.swift */,
@@ -78,6 +81,14 @@
 				0553962B219E49CC006E44B3 /* Info.plist */,
 			);
 			path = Gainzz;
+			sourceTree = "<group>";
+		};
+		055E286821A361C200994F59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				055E286921A361DD00994F59 /* Lift.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1DF83D802C980C3FCAD78F2A /* Pods */ = {
@@ -228,6 +239,7 @@
 				05539636219E6C7C006E44B3 /* addLiftPage.swift in Sources */,
 				05539634219E6C51006E44B3 /* LoginPage.swift in Sources */,
 				05539620219E49BA006E44B3 /* AppDelegate.swift in Sources */,
+				055E286A21A361DD00994F59 /* Lift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

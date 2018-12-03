@@ -75,6 +75,7 @@ let loginRegisterControl: UISegmentedControl = {
 }()
 
 
+
 class LoginPage: UIViewController {
     
     override func viewDidLoad() {
@@ -86,11 +87,12 @@ class LoginPage: UIViewController {
         view.addSubview(loginRegisterControl)
         loginButton.addTarget(self, action: #selector(regOrLogin), for: .touchUpInside)
         loginRegisterControl.addTarget(self, action: #selector(handleSwitch), for: .allEvents)
-        setInputConstraints()
         setButtonConstraints()
         setLoginImage()
         setSegmentedControl()
+        setInputConstraints()
         handleSwitch()
+        
         
     }
     
@@ -99,20 +101,19 @@ class LoginPage: UIViewController {
         let title = loginRegisterControl.titleForSegment(at: loginRegisterControl.selectedSegmentIndex)
         loginButton.setTitle(title, for: .normal)
         
-        //setting height based on toggle
-        containerHeight?.constant = loginRegisterControl.selectedSegmentIndex == 1 ? 250 : 200
-        //setting name size based on toggle
-        nameFieldHeight?.isActive = false
+        /*setting height based on toggle
+        setting name size based on toggle*/
+        nameFieldHeight.isActive = false
         nameFieldHeight = nameTextField.heightAnchor.constraint(equalTo: loginContainer.heightAnchor, multiplier: loginRegisterControl.selectedSegmentIndex == 1 ? 1/3 : 0)
-        nameFieldHeight?.isActive = true
+        nameFieldHeight.isActive = true
         //setting email size based on toggle
-        emailFieldHeight?.isActive = false
+        emailFieldHeight.isActive = false
         emailFieldHeight = emailTextField.heightAnchor.constraint(equalTo: loginContainer.heightAnchor, multiplier: loginRegisterControl.selectedSegmentIndex == 1 ? 1/3 : 1/2)
-        emailFieldHeight?.isActive = true
+        emailFieldHeight.isActive = true
         //setting password size based on toggle
-        passFieldHeight?.isActive = false
-        passFieldHeight = passwordTextField.heightAnchor.constraint(equalTo: loginContainer.heightAnchor, multiplier: loginRegisterControl.selectedSegmentIndex == 1 ? 1/3 : 1/2)
-        passFieldHeight?.isActive = true
+        passFieldHeight.isActive = false
+        passFieldHeight = passwordTextField.heightAnchor.constraint(equalTo:emailTextField.heightAnchor)
+        passFieldHeight.isActive = true
         
     }
     
@@ -146,6 +147,9 @@ class LoginPage: UIViewController {
             self.dismiss(animated: true, completion: nil)
             emailTextField.text = ""
             passwordTextField.text = ""
+            self.nameFieldHeight.isActive = false
+            self.emailFieldHeight.isActive = false
+            self.passFieldHeight.isActive = false
         }
     }
     
@@ -181,12 +185,13 @@ class LoginPage: UIViewController {
         }
     }
     
-    var containerHeight: NSLayoutConstraint?
-    var nameFieldHeight: NSLayoutConstraint?
-    var emailFieldHeight: NSLayoutConstraint?
-    var passFieldHeight: NSLayoutConstraint?
+    var containerHeight: NSLayoutConstraint!
+    var nameFieldHeight: NSLayoutConstraint!
+    var emailFieldHeight: NSLayoutConstraint!
+    var passFieldHeight: NSLayoutConstraint!
     func setInputConstraints()
     {
+        //if loginContainer.heightAnchor == 250
         
         //add x,y, width and height
         
@@ -195,7 +200,7 @@ class LoginPage: UIViewController {
         
         loginContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         containerHeight = loginContainer.heightAnchor.constraint(equalToConstant: 250)
-        containerHeight?.isActive = true
+        containerHeight.isActive = true
         
         loginContainer.addSubview(nameTextField)
         loginContainer.addSubview(emailTextField)
@@ -205,7 +210,7 @@ class LoginPage: UIViewController {
         nameTextField.topAnchor.constraint(equalTo: loginContainer.topAnchor).isActive = true
         nameTextField.widthAnchor.constraint(equalTo: loginContainer.widthAnchor).isActive = true
         nameFieldHeight = nameTextField.heightAnchor.constraint(equalTo: loginContainer.heightAnchor, multiplier: 1/3)
-        nameFieldHeight?.isActive = true
+        nameFieldHeight.isActive = true
         nameTextField.backgroundColor = UIColor.white
         
         emailTextField.leftAnchor.constraint(equalTo: nameTextField.leftAnchor).isActive = true
@@ -213,7 +218,7 @@ class LoginPage: UIViewController {
         emailTextField.widthAnchor.constraint(equalTo: loginContainer.widthAnchor).isActive = true
         emailFieldHeight = emailTextField.heightAnchor.constraint(equalTo: loginContainer.heightAnchor, multiplier: 1/3)
         
-        emailFieldHeight?.isActive = true
+        emailFieldHeight.isActive = true
         emailTextField.backgroundColor = UIColor.white
         
         passwordTextField.leftAnchor.constraint(equalTo: emailTextField.leftAnchor).isActive = true
@@ -221,7 +226,7 @@ class LoginPage: UIViewController {
         passwordTextField.widthAnchor.constraint(equalTo: loginContainer.widthAnchor).isActive = true
         passFieldHeight = passwordTextField.heightAnchor.constraint(equalTo: loginContainer.heightAnchor, multiplier: 1/3)
         
-        passFieldHeight?.isActive = true
+        passFieldHeight.isActive = true
         passwordTextField.backgroundColor = UIColor.white
         
         

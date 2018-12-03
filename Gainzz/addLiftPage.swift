@@ -56,14 +56,16 @@ let setTextField: UITextField = {
 
 let repTextField: UITextField = {
     let tf = UITextField()
-    tf.placeholder = "Number of sets performed"
+    tf.placeholder = "Number of reps performed"
     tf.translatesAutoresizingMaskIntoConstraints = false
     tf.layer.borderWidth = 1.0
     tf.layer.borderColor = UIColor.black.cgColor
     return tf
 }()
 class addLiftPage: UIViewController {
-    
+    var LiftNames = [Lift]()
+    var LIFT: Lift!
+    var position: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -72,16 +74,76 @@ class addLiftPage: UIViewController {
         view.addSubview(inputContainer)
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addLift), for: .touchUpInside)
+        setPassedData()
         setInputConstraints()
         setButtonConstraints()
         
         
     }
     
+    @objc func setPassedData(){
+        if LIFT != nil {
+        liftTextField.text = LIFT.Name
+        weightTextField.text = LIFT.Weight
+        setTextField.text = LIFT.Sets
+        repTextField.text = LIFT.Reps
+        }
+        else{
+            liftTextField.text = ""
+            weightTextField.text = ""
+            setTextField.text = ""
+            repTextField.text = ""
+        }
+    }
+    
     
     @objc func addLift()
     {
         
+        guard let liftName = liftTextField.text, let weightUsed = weightTextField.text, let setsDone = setTextField.text, let repsDone = repTextField.text else {
+            print ("Form is not Valid, make sure no boxes are empty.")
+            return
+        }
+
+        if LIFT != nil
+        {
+            updateLift(liftName: liftName, weightUsed: weightUsed, setsDone: setsDone, repsDone: repsDone)
+            print("update")
+        }
+        else
+        {
+            newLift(liftName: liftName, weightUsed: weightUsed, setsDone: setsDone, repsDone: repsDone)
+            print("new")
+        }
+    }
+    
+    func updateLift(liftName: String?, weightUsed: String?, setsDone: String?, repsDone: String?)
+    {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "MM;dd;yyyy"
+        let currentDate = format.string(from: date)
+        let user = Auth.auth().currentUser?.uid
+        let ref = Database.database().reference(fromURL: "https://gainzz-4dcf7.firebaseio.com/")
+        let updateRef = ref.child("users").child(user!).child("Workouts").child(currentDate).child(LIFT.ID!)
+        let values = ["Name": liftName, "Weight": weightUsed, "Sets": setsDone, "Reps": repsDone, "ID": LIFT.ID]
+        updateRef.updateChildValues(values as [AnyHashable : Any])
+        
+        navigationController?.popViewController(animated: true)
+    }
+    func newLift(liftName: String?, weightUsed: String?, setsDone: String?, repsDone: String?)
+    {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "MM;dd;yyyy"
+        let currentDate = format.string(from: date)
+        let user = Auth.auth().currentUser?.uid
+        let ref = Database.database().reference(fromURL: "https://gainzz-4dcf7.firebaseio.com/")
+        let newLiftRef = ref.child("users").child(user!).child("Workouts").child(currentDate).childByAutoId()
+        let key = newLiftRef.key
+        let values = ["Name": liftName, "Weight": weightUsed, "Sets": setsDone, "Reps": repsDone, "ID": key]
+        newLiftRef.updateChildValues(values as [AnyHashable : Any])
+        navigationController?.popViewController(animated: true)
     }
     func setInputConstraints()
     {
