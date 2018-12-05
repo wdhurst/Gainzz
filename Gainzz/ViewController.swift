@@ -13,14 +13,14 @@ class ViewController: UITableViewController {
     
     let cellId = "cell"
     var LiftNames = [Lift]()
-        var addButton: UIButton = {
+        /*var addButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.green
         button.setTitle("Workout Finished", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isOpaque = true
         return button
-    }()
+    }()*/
     
     @objc func addLift()
     {
@@ -67,7 +67,16 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let LIFT = LiftNames[indexPath.row]
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "MM;dd;yyyy"
+        let currentDate = format.string(from: date)
+        let user = Auth.auth().currentUser?.uid
+        let ref = Database.database().reference(fromURL: "https://gainzz-4dcf7.firebaseio.com/")
+        let updateRef = ref.child("users").child(user!).child("Workouts").child(currentDate).child(LIFT.ID!)
+        updateRef.removeValue()
+        setTableView()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,10 +90,6 @@ class ViewController: UITableViewController {
         return cell
     }
     
-    @objc func handleSwipe()
-    {
-        
-    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let lift = LiftNames[indexPath.row]

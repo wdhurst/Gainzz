@@ -63,6 +63,7 @@ let repTextField: UITextField = {
     return tf
 }()
 class addLiftPage: UIViewController {
+    var buttonClickedCount: Int!
     var LiftNames = [Lift]()
     var LIFT: Lift!
     var position: Int!
@@ -77,8 +78,10 @@ class addLiftPage: UIViewController {
         setPassedData()
         setInputConstraints()
         setButtonConstraints()
-        
-        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        buttonClickedCount = 0
     }
     
     @objc func setPassedData(){
@@ -99,7 +102,7 @@ class addLiftPage: UIViewController {
     
     @objc func addLift()
     {
-        
+        buttonClickedCount += 1
         guard let liftName = liftTextField.text, let weightUsed = weightTextField.text, let setsDone = setTextField.text, let repsDone = repTextField.text else {
             print ("Form is not Valid, make sure no boxes are empty.")
             return
@@ -112,7 +115,11 @@ class addLiftPage: UIViewController {
         }
         else
         {
-            newLift(liftName: liftName, weightUsed: weightUsed, setsDone: setsDone, repsDone: repsDone)
+            if (buttonClickedCount <= 1)
+            {
+                newLift(liftName: liftName, weightUsed: weightUsed, setsDone: setsDone, repsDone: repsDone)
+            }
+            
             print("new")
         }
     }
@@ -142,6 +149,7 @@ class addLiftPage: UIViewController {
         let newLiftRef = ref.child("users").child(user!).child("Workouts").child(currentDate).childByAutoId()
         let key = newLiftRef.key
         let values = ["Name": liftName, "Weight": weightUsed, "Sets": setsDone, "Reps": repsDone, "ID": key]
+        print(values)
         newLiftRef.updateChildValues(values as [AnyHashable : Any])
         navigationController?.popViewController(animated: true)
     }
