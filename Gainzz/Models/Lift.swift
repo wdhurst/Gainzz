@@ -13,7 +13,7 @@ class Lift: NSObject {
     var Reps: String?
     var Sets: String?
     var Weight: String?
-    var ID: String? 
+    var ID: String?
     
     init(Name: String?, Reps: String?, Sets: String?, Weight: String?, ID: String?) {
         self.Name = Name

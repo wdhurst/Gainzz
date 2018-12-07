@@ -1,3 +1,4 @@
+
 //
 //  addLiftPage.swift
 //  Gainz
@@ -5,7 +6,6 @@
 //  Created by Wyatt Hurst on 10/16/18.
 //  Copyright © 2018 Wyatt Hurst. All rights reserved.
 //
-
 import UIKit
 import Firebase
 
@@ -86,10 +86,10 @@ class addLiftPage: UIViewController {
     
     @objc func setPassedData(){
         if LIFT != nil {
-        liftTextField.text = LIFT.Name
-        weightTextField.text = LIFT.Weight
-        setTextField.text = LIFT.Sets
-        repTextField.text = LIFT.Reps
+            liftTextField.text = LIFT.Name
+            weightTextField.text = LIFT.Weight
+            setTextField.text = LIFT.Sets
+            repTextField.text = LIFT.Reps
         }
         else{
             liftTextField.text = ""
@@ -107,7 +107,7 @@ class addLiftPage: UIViewController {
             print ("Form is not Valid, make sure no boxes are empty.")
             return
         }
-
+        
         if LIFT != nil
         {
             updateLift(liftName: liftName, weightUsed: weightUsed, setsDone: setsDone, repsDone: repsDone)
