@@ -61,7 +61,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             
 
             var workoutReps = document.createElement("H4")
-            var reps = document.createTextNode("Reps Performed: " + lift.Name)
+            var reps = document.createTextNode("Reps Performed: " + lift.Reps)
             workoutReps.appendChild(reps)
             document.body.appendChild(workoutReps)
 
