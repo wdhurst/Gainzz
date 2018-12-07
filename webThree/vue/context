@@ -1,0 +1,8 @@
+#!/bin/bash
+if ! echo $PATH | egrep "(^|:)/Users/DEAN/Desktop/Web3/vue/bin(:|$)" >/dev/null
+then
+   echo "prefix path with /Users/DEAN/Desktop/Web3/vue/bin..."
+   export PATH="/Users/DEAN/Desktop/Web3/vue/bin:$PATH"
+else
+   echo "/Users/DEAN/Desktop/Web3/vue/bin is already in your path"
+fi
